@@ -3,7 +3,8 @@ const express = require("express");
 const router = express.Router();
 
 // Controllers ko import karna
-const { getUsers, addUser } = require("../controllers/userController");
+// const { getUsers, addUser } = require("../controllers/userController");
+const { getUsers, addUser } = require("../controllers/userController2");
 
 // URL aur Controller ko connect karna
 router.get("/users", getUsers);
