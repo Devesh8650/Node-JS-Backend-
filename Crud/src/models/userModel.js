@@ -10,7 +10,7 @@ const userSchema = new mongoose.Schema({
     required: true,
   },
   age: {
-    tyepe: Number,
+    type: Number,
   },
 });
 

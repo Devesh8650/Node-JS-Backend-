@@ -14,4 +14,22 @@ const createUser = async (req, res) => {
     });
   }
 };
-module.exports = { createUser };
+
+// GET USER
+const getUsers = async (req, res) => {
+  try {
+    const users = await User.find();
+    res.status(200).json({
+      success: true,
+      totalUsers: users.length,
+      data: users,
+    });
+  } catch (err) {
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+  }
+};
+
+module.exports = { createUser,getUsers };
