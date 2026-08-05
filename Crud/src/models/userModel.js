@@ -12,7 +12,12 @@ const userSchema = new mongoose.Schema({
   age: {
     type: Number,
   },
+  // SOFT DELETE USER KE LIYE
+  isDeleted: {
+    type: Boolean,
+    default: false,
+  },
 });
 
-const User = mongoose.model("User",userSchema);
+const User = mongoose.model("User", userSchema);
 module.exports = User;

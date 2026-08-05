@@ -112,10 +112,70 @@ const updateUserPartially = async (req, res) => {
   }
 };
 
+// Hard Delete --->Ye recover nahi ho sakta Delete Data Vapas nhi ae skta hai
+const deleteUser = async (req, res) => {
+  try {
+    const id = req.params.id;
+    const user = await User.findByIdAndDelete(id);
+    if (!user) {
+      return res.status(404).json({
+        success: true,
+        message: "User not found",
+      });
+    }
+    res.status(200).json({
+      success: true,
+      message: "User Deleted Successfully",
+      data: user,
+    });
+  } catch (err) {
+    res.status(500).json({
+      success: false,
+      message: err.message,
+    });
+  }
+};
+
+// SOFT DELETE
+const deleteUserSoft = async (req, res) => {
+  try {
+    const user = await User.findByIdAndUpdate(
+      req.params.id,
+      {
+        isDeleted: true,
+      },
+
+      {
+        new: true,
+      },
+    );
+
+    if (!user) {
+      return res.status(404).json({
+        success: false,
+        message: "User not found",
+      });
+    }
+
+    res.status(200).json({
+      success: true,
+      message: "User deleted successfully",
+      data: user,
+    });
+  } catch (err) {
+    res.status(500).json({
+      success: false,
+      message: err.message,
+    });
+  }
+};
+
 module.exports = {
   createUser,
   getUsers,
   getUserById,
   updateUser,
   updateUserPartially,
+  deleteUser,
+  deleteUserSoft,
 };
